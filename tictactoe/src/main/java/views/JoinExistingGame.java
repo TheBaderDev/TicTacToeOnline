@@ -56,7 +56,13 @@ public class JoinExistingGame extends VerticalLayout implements BeforeEnterObser
 
         logger.info("");
         if (accessControl.isUserSignedIn()) {
-            event.rerouteTo(Game.class);
+            try {
+                event.rerouteTo(Game.class);
+            } catch (IllegalArgumentException e) {
+                accessControl.signOut();
+            } catch (NullPointerException e) {
+                accessControl.signOut();
+            }
         }
     }
 

@@ -75,13 +75,14 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         String groupCode = groupCode();
+        String player = CurrentUser.get().getNickname();
 
-        logger.info("groupCode: '" + groupCode + "'");
+        logger.info("groupCode: '" + groupCode + "' player: '" + player + "'");
         UI ui = attachEvent.getUI();
         broadcasterRegistration = Broadcaster.register(newMessage -> {
             ui.access(() -> {
+                logger.info("groupCode: '" + groupCode + "' player: '" + player + "'");
                 logger.info("newMessage: '" + newMessage + "'");
-                logger.info("groupCode: '" + groupCode + "'");
                 if (newMessage.contentEquals(groupCode)) {
                     reloadUI();
                 }
