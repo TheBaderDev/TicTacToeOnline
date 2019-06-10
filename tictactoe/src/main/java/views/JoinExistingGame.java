@@ -17,7 +17,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.communication.PushMode;
 
+import applicationstuff.Broadcaster;
 import authentication.AccessControlFactory;
+import authentication.CurrentUser;
 import database.Manager;
 
 @Route(value = "joingame")
@@ -42,6 +44,7 @@ public class JoinExistingGame extends VerticalLayout implements BeforeEnterObser
                 Manager m = new Manager();
                 authentication.AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
                 boolean b = accessControl.signIn(nickname.getValue(), this.url, 2);
+                Broadcaster.broadcast(Integer.toString(this.url));
 
                 // Navigation
                 logger.info("");
@@ -54,11 +57,8 @@ public class JoinExistingGame extends VerticalLayout implements BeforeEnterObser
                 UI.getCurrent().navigate(Game.class);
             }
         });
-        NativeButton cancelButton = new NativeButton("Cancel", e -> {
-            UI.getCurrent().getPage().reload();
-        });
 
-        add(nickname, confirmButton, cancelButton);
+        add(nickname, confirmButton);
     }
 
     @Override

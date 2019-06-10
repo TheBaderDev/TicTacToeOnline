@@ -28,7 +28,7 @@ import database.Manager;
 @Route("")
 @PageTitle("Game Panel")
 @Push
-public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeLeaveObserver, RouterLayout {
+public class Game extends VerticalLayout implements BeforeEnterObserver, RouterLayout {
     private static final long serialVersionUID = 1L;
     protected static Logger logger = Logger.getLogger(Game.class);
     Registration broadcasterRegistration;
@@ -50,12 +50,6 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
 
             // Labels
             Label label = new Label("Send the following Link to your friend:");
-
-            //        String route = RouteConfiguration.forApplicationScope().getUrl(JoinExistingGame.class);
-            //
-            //        Router router = UI.getCurrent().getRouter();
-            //        Map<Class<? extends RouterLayout>, List<RouteData>> routesByParent = router.getRoutesByParent();
-            //        List<RouteData> myRoutes = routesByParent.get(JoinExistingGame.class);
 
             Label label2 = new Label("localhost:8080/joingame/" + CurrentUser.get().getGroupId());
             add(label, label2, new Hr());
@@ -103,19 +97,18 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
         }
     }
 
-    @Override
-    public void beforeLeave(BeforeLeaveEvent event) {
-        authentication.AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
-
-        logger.info("");
-        if (accessControl.isUserSignedIn()) {
-            Manager m = new Manager();
-            if (m.getNumberPlayers(CurrentUser.get().getGroupId()) == 2) {
-                accessControl.signOut();
-            } else {
-                m.deleteGroup(Cayenne.intPKForObject(CurrentUser.get()));
-                accessControl.signOut();
-            }
-        }
-    }
+//    @Override
+//    public void beforeLeave(BeforeLeaveEvent event) {
+//        authentication.AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
+//
+//        if (accessControl.isUserSignedIn()) {
+//            Manager m = new Manager();
+//            if (m.getNumberPlayers(CurrentUser.get().getGroupId()) == 2) {
+//                accessControl.signOut();
+//            } else {
+//                m.deleteGroup(Cayenne.intPKForObject(CurrentUser.get()));
+//                accessControl.signOut();
+//            }
+//        }
+//    }
 }

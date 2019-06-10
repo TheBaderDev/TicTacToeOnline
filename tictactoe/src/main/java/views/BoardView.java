@@ -7,6 +7,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.RouterLayout;
 
 import applicationstuff.Broadcaster;
 import authentication.CurrentUser;
@@ -88,6 +89,7 @@ public class BoardView extends Div {
         } else if (list[0] != 0 && list[1] != 0 && list[2] != 0 &&
                         list[3] != 0 && list[4] != 0 && list[5] != 0 &&
                         list[6] != 0 && list[7] != 0 && list[8] != 0) {
+        	winner = 0;
             return true;
         } else {
             return false;
@@ -104,7 +106,7 @@ public class BoardView extends Div {
         }
         Button resetB = new Button("Reset Game", e -> {
             m.resetGame(groupID);
-            reloadBoard();
+            Broadcaster.broadcast(Integer.toString(groupID));
         });
         add(label, resetB);
     }
@@ -124,7 +126,8 @@ public class BoardView extends Div {
         rv.addClickListener(e -> {
             makeButtonClick(value);
         });
-        if (list[value] != 0 || checkEnd() || playerNumber == lastMoved) {
+        Manager m = new Manager();
+        if (list[value] != 0 || checkEnd() || playerNumber == lastMoved || m.getNumberPlayers(groupID) != 2) {
             rv.setEnabled(false);
         }
         return rv;

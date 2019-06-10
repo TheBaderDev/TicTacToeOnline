@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-map xmlns="http://cayenne.apache.org/schema/10/modelMap"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://cayenne.apache.org/schema/10/modelMap https://cayenne.apache.org/schema/10/modelMap.xsd"
+	 project-version="10">
+	<property name="defaultPackage" value="objects"/>
+	<db-entity name="GROUP" catalog="tictactoe">
+		<db-attribute name="GROUP_ID" type="INTEGER" isPrimaryKey="true" isGenerated="true" isMandatory="true" length="10"/>
+		<db-attribute name="P1" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P2" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P3" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P4" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P5" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P6" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P7" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P8" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="P9" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="PLAYER1_ID" type="INTEGER" length="10"/>
+		<db-attribute name="PLAYER2_ID" type="INTEGER" length="10"/>
+		<db-attribute name="lastToGo" type="INTEGER" isMandatory="true" length="10"/>
+	</db-entity>
+	<db-entity name="USER" catalog="tictactoe">
+		<db-attribute name="GROUP_ID" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="ID" type="INTEGER" isPrimaryKey="true" isGenerated="true" isMandatory="true" length="10"/>
+		<db-attribute name="NICKNAME" type="VARCHAR" isMandatory="true" length="45"/>
+	</db-entity>
+	<obj-entity name="Group" className="objects.Group" dbEntityName="GROUP">
+		<obj-attribute name="player1Id" type="int" db-attribute-path="PLAYER1_ID"/>
+		<obj-attribute name="player2Id" type="int" db-attribute-path="PLAYER2_ID"/>
+		<obj-attribute name="p1" type="int" db-attribute-path="P1"/>
+		<obj-attribute name="p2" type="int" db-attribute-path="P2"/>
+		<obj-attribute name="p3" type="int" db-attribute-path="P3"/>
+		<obj-attribute name="p4" type="int" db-attribute-path="P4"/>
+		<obj-attribute name="p5" type="int" db-attribute-path="P5"/>
+		<obj-attribute name="p6" type="int" db-attribute-path="P6"/>
+		<obj-attribute name="p7" type="int" db-attribute-path="P7"/>
+		<obj-attribute name="p8" type="int" db-attribute-path="P8"/>
+		<obj-attribute name="p9" type="int" db-attribute-path="P9"/>
+		<obj-attribute name="lastToGo" type="int" db-attribute-path="lastToGo"/>
+	</obj-entity>
+	<obj-entity name="User" className="objects.User" dbEntityName="USER">
+		<obj-attribute name="nickname" type="java.lang.String" db-attribute-path="NICKNAME"/>
+		<obj-attribute name="groupId" type="int" db-attribute-path="GROUP_ID"/>
+	</obj-entity>
+	<dbImport xmlns="http://cayenne.apache.org/schema/10/dbimport">
+		<catalog>
+			<name>tictactoe</name>
+		</catalog>
+		<forceDataMapCatalog>false</forceDataMapCatalog>
+		<forceDataMapSchema>false</forceDataMapSchema>
+		<namingStrategy>org.apache.cayenne.dbsync.naming.DefaultObjectNameGenerator</namingStrategy>
+		<skipPrimaryKeyLoading>false</skipPrimaryKeyLoading>
+		<skipRelationshipsLoading>false</skipRelationshipsLoading>
+		<useJava7Types>false</useJava7Types>
+		<usePrimitives>true</usePrimitives>
+	</dbImport>
+	<cgen xmlns="http://cayenne.apache.org/schema/10/cgen">
+		<destDir>../../java</destDir>
+		<mode>all</mode>
+		<template>templates/v4_1/subclass.vm</template>
+		<superTemplate>templates/v4_1/superclass.vm</superTemplate>
+		<outputPattern>*.java</outputPattern>
+		<makePairs>true</makePairs>
+		<usePkgPath>true</usePkgPath>
+		<overwrite>false</overwrite>
+		<createPropertyNames>false</createPropertyNames>
+		<createPKProperties>false</createPKProperties>
+		<client>false</client>
+	</cgen>
+</data-map>
