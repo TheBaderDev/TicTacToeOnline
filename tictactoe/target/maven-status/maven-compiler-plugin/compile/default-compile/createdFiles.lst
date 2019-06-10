@@ -1,0 +1,7 @@
+views/MainView.class
+authentication/AccessControl.class
+authentication/BasicAccessControl.class
+applicationstuff/Broadcaster.class
+authentication/CurrentUser.class
+authentication/AccessControlFactory.class
+applicationstuff/ApplicationInitListener.class
