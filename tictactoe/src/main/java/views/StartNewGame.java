@@ -27,6 +27,7 @@ public class StartNewGame extends VerticalLayout implements BeforeEnterObserver 
         Label label = new Label("TicTacToe Online");
 
         TextField nickname = new TextField("", "Nickname");
+        nickname.focus();
         Button create = new Button("Create a new game", e -> {
             if (nickname.getValue().contentEquals("")) {
                 Notification.show("Nickname cannot be blank");

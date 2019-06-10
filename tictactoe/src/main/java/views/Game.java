@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -33,7 +32,9 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
     private static final long serialVersionUID = 1L;
     protected static Logger logger = Logger.getLogger(Game.class);
     Registration broadcasterRegistration;
-    Div boardView;
+    private String groupID;
+    private String player;
+    BoardView boardView;
 
     public Game() {
         logger.info("");
@@ -44,6 +45,9 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
         AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
 
         if (accessControl.isUserSignedIn()) {
+            groupID = "" + CurrentUser.get().getGroupId();
+            player = CurrentUser.get().getNickname();
+
             // Labels
             Label label = new Label("Send the following Link to your friend:");
 
@@ -63,30 +67,23 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
     }
 
     public void reloadUI() {
-        if (boardView != null) {
-            ((BoardView) boardView).reloadBoard();
-        }
-    }
-
-    private String groupCode() {
-        return Integer.toString(CurrentUser.get().getGroupId());
+        logger.info("groupID: '" + groupID + "' player: '" + player + "'");
+        boardView.reloadBoard();
     }
 
     @Override
     protected void onAttach(AttachEvent attachEvent) {
-        String groupCode = groupCode();
-        String player = CurrentUser.get().getNickname();
+        logger.info("groupID: '" + groupID + "' player: '" + player + "'");
 
-        logger.info("groupCode: '" + groupCode + "' player: '" + player + "'");
         UI ui = attachEvent.getUI();
         broadcasterRegistration = Broadcaster.register(newMessage -> {
-            ui.access(() -> {
-                logger.info("groupCode: '" + groupCode + "' player: '" + player + "'");
-                logger.info("newMessage: '" + newMessage + "'");
-                if (newMessage.contentEquals(groupCode)) {
-                    reloadUI();
-                }
-            });
+            logger.info("groupID: '" + groupID + "' newMessage: '" + newMessage + "'");
+
+            if (newMessage.contentEquals(groupID)) {
+                ui.access(() -> {
+                    this.reloadUI();
+                });
+            }
         });
     }
 

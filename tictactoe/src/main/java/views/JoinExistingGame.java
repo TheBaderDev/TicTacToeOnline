@@ -31,6 +31,7 @@ public class JoinExistingGame extends VerticalLayout implements BeforeEnterObser
         Label label = new Label("TicTacToe Online");
 
         TextField nickname = new TextField("", "Nickname");
+        nickname.focus();
         NativeButton confirmButton = new NativeButton("Join", e -> {
             if (nickname.getValue().contentEquals("")) {
                 UI.getCurrent().navigate(StartNewGame.class);
