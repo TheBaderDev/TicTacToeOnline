@@ -26,6 +26,8 @@ public class JoinExistingGame extends VerticalLayout implements BeforeEnterObser
     private int url;
 
     public JoinExistingGame() {
+        logger.info("");
+
         Label label = new Label("TicTacToe Online");
 
         TextField nickname = new TextField("", "Nickname");

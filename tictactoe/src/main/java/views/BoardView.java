@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import applicationstuff.Broadcaster;
+import authentication.CurrentUser;
 import database.Manager;
 import objects.User;
 
@@ -16,12 +17,15 @@ public class BoardView extends Div {
     protected static Logger logger = Logger.getLogger(BoardView.class);
     private int playerNumber;
     private int groupID;
+    private String player;
     private int[] list;
     private int lastMoved;
     private int winner;
 
     public BoardView(User user) {
         this.groupID = user.getGroupId();
+        this.player = CurrentUser.get().getNickname();
+
         Manager m = new Manager();
         this.playerNumber = Manager.getPlayerNumberInGroup(user);
         this.winner = 0;
@@ -30,13 +34,14 @@ public class BoardView extends Div {
     }
 
     public void reloadBoard() {
-        logger.info("");
+        logger.info("groupCode: '" + groupID + "' player: '" + player + "'");
 
         removeAll();
         Manager m = new Manager();
         this.list = m.getBoardState(groupID);
         this.lastMoved = m.getLastMoved(groupID);
 
+        logger.info("groupCode: '" + groupID + "' lastMoved: '" + lastMoved + "'");
         if (!checkEnd()) {
             int n;
             if (lastMoved == 1) {

@@ -46,6 +46,7 @@ public class StartNewGame extends VerticalLayout implements BeforeEnterObserver 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         authentication.AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
+
         if (accessControl.isUserSignedIn()) {
             accessControl.signOut();
         }
