@@ -2,6 +2,7 @@ package views;
 
 import org.apache.log4j.Logger;
 
+import com.vaadin.flow.component.PushConfiguration;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.NativeButton;
@@ -14,6 +15,7 @@ import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.shared.communication.PushMode;
 
 import authentication.AccessControlFactory;
 import database.Manager;
@@ -43,6 +45,12 @@ public class JoinExistingGame extends VerticalLayout implements BeforeEnterObser
 
                 // Navigation
                 logger.info("");
+
+                PushConfiguration config = UI.getCurrent().getPushConfiguration();
+
+                logger.info("config: '" + config + "'");
+                UI.getCurrent().getPushConfiguration().setPushMode(PushMode.AUTOMATIC);
+                UI.getCurrent().setPollInterval(-1);
                 UI.getCurrent().navigate(Game.class);
             }
         });
