@@ -1,6 +1,7 @@
 package views;
 
 import org.apache.cayenne.Cayenne;
+import org.apache.log4j.Logger;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.DetachEvent;
@@ -24,15 +25,17 @@ import authentication.AccessControlFactory;
 import authentication.CurrentUser;
 import database.Manager;
 
-@Route("playing")
+@Route("")
 @PageTitle("Game Panel")
 @Push
 public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeLeaveObserver {
     private static final long serialVersionUID = 1L;
+    protected static Logger logger = Logger.getLogger(Game.class);
     Registration broadcasterRegistration;
     Div boardView;
 
     public Game() {
+        logger.info("");
         loadUI();
     }
 
@@ -76,6 +79,8 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
         UI ui = attachEvent.getUI();
         broadcasterRegistration = Broadcaster.register(newMessage -> {
             ui.access(() -> {
+                logger.info("newMessage: '" + newMessage + "'");
+                logger.info("groupCode: '" + groupCode + "'");
                 if (newMessage.contentEquals(groupCode)) {
                     reloadUI();
                 }
@@ -101,6 +106,7 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
     @Override
     public void beforeLeave(BeforeLeaveEvent event) {
         authentication.AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
+
         if (accessControl.isUserSignedIn()) {
             Manager m = new Manager();
             if (m.getNumberPlayers(CurrentUser.get().getGroupId()) == 2) {

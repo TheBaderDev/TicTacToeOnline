@@ -1,5 +1,7 @@
 package views;
 
+import org.apache.log4j.Logger;
+
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Hr;
@@ -21,17 +23,20 @@ import database.Manager;
 @PageTitle("Joing a Game")
 public class JoinExistingGame extends VerticalLayout implements BeforeEnterObserver, HasUrlParameter<Integer> {
     private static final long serialVersionUID = 1L;
+    protected static Logger logger = Logger.getLogger(JoinExistingGame.class);
     private int url;
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         authentication.AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
+
         if (!accessControl.isUserSignedIn()) {
             // Popup Dialog
             Dialog dialog = new Dialog();
             dialog.setCloseOnEsc(false);
             dialog.setCloseOnOutsideClick(false);
             TextField nickname = new TextField("", "Nickname");
+
             NativeButton confirmButton = new NativeButton("Join", e -> {
                 if (nickname.getValue().contentEquals("")) {
                     dialog.close();
@@ -45,13 +50,14 @@ public class JoinExistingGame extends VerticalLayout implements BeforeEnterObser
 
                     // Navigation
                     dialog.close();
-                    UI.getCurrent().navigate(Game.class);
+                    event.rerouteTo(Game.class);
+                    //                    UI.getCurrent().navigate(Game.class);
                 }
             });
             NativeButton cancelButton = new NativeButton("Cancel", e -> {
                 dialog.close();
                 event.rerouteTo(StartNewGame.class);
-                UI.getCurrent().getPage().reload();
+                //                UI.getCurrent().getPage().reload();
 
             });
 

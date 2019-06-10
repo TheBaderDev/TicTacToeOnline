@@ -17,7 +17,7 @@ import com.vaadin.flow.router.Route;
 import authentication.AccessControlFactory;
 import database.Manager;
 
-@Route("")
+@Route("startgame")
 @PageTitle("StartNewGame")
 public class StartNewGame extends VerticalLayout implements BeforeEnterObserver {
     private static final long serialVersionUID = 1L;
