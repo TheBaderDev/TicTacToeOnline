@@ -7,7 +7,7 @@ import com.vaadin.flow.server.VaadinServiceInitListener;
 
 import authentication.AccessControl;
 import authentication.AccessControlFactory;
-import views.MainView;
+import views.StartNewGame;
 
 /**
  * This class is used to listen to BeforeEnter event of all UIs in order to check whether a user is signed in or not

@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import com.mysql.cj.log.Log;
 import objects.Group;
 import objects.User;
-import views.MainView;
+import views.StartNewGame;
 
 public class Manager {
 
