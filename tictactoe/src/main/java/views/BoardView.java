@@ -109,13 +109,20 @@ public class BoardView extends Div {
         add(label, resetB);
     }
 
+    public void makeButtonClick(int value) {
+        Manager m = new Manager();
+
+        logger.info("groupID: '" + groupID + "' playerNumber: '" + playerNumber + "'");
+        m.setMark(groupID, playerNumber, value + 1);
+        m.setLastMoved(groupID, playerNumber);
+        Broadcaster.broadcast(Integer.toString(groupID));
+    }
+
     public Button makeButton(int value) {
         Button rv = new Button(getMarkSymbol(list[value]));
+
         rv.addClickListener(e -> {
-            Manager m = new Manager();
-            m.setMark(groupID, playerNumber, value + 1);
-            m.setLastMoved(groupID, playerNumber);
-            Broadcaster.broadcast(Integer.toString(groupID));
+            makeButtonClick(value);
         });
         if (list[value] != 0 || checkEnd() || playerNumber == lastMoved) {
             rv.setEnabled(false);

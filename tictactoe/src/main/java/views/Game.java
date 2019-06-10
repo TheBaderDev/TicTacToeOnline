@@ -17,6 +17,7 @@ import com.vaadin.flow.router.BeforeLeaveEvent;
 import com.vaadin.flow.router.BeforeLeaveObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.shared.Registration;
 
 import applicationstuff.Broadcaster;
@@ -28,7 +29,7 @@ import database.Manager;
 @Route("")
 @PageTitle("Game Panel")
 @Push
-public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeLeaveObserver {
+public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeLeaveObserver, RouterLayout {
     private static final long serialVersionUID = 1L;
     protected static Logger logger = Logger.getLogger(Game.class);
     Registration broadcasterRegistration;
@@ -59,7 +60,6 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
             boardView = new BoardView(CurrentUser.get());
             add(boardView);
         }
-
     }
 
     public void reloadUI() {
@@ -100,6 +100,7 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
     public void beforeEnter(BeforeEnterEvent event) {
         AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
 
+        logger.info("");
         if (!accessControl.isUserSignedIn()) {
             event.rerouteTo(StartNewGame.class);
         }
@@ -109,6 +110,7 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, BeforeL
     public void beforeLeave(BeforeLeaveEvent event) {
         authentication.AccessControl accessControl = AccessControlFactory.getInstance().getAccessControl();
 
+        logger.info("");
         if (accessControl.isUserSignedIn()) {
             Manager m = new Manager();
             if (m.getNumberPlayers(CurrentUser.get().getGroupId()) == 2) {
