@@ -1,0 +1,17 @@
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/authentication/BasicAccessControl.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/objects/User.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/objects/auto/_Group.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/objects/auto/_User.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/authentication/AccessControl.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/views/BoardView.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/authentication/CurrentUser.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/applicationstuff/ApplicationInitListener.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/views/StartNewGame.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/objects/Group.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/views/Game.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/objects/auto/_Datamap.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/views/JoinExistingGame.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/database/Manager.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/authentication/AccessControlFactory.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/applicationstuff/Broadcaster.java
+/home/darthbader/git/TicTacToeOnline/tictactoe/src/main/java/objects/Datamap.java

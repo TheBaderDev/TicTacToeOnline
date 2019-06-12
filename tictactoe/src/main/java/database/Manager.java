@@ -22,11 +22,11 @@ public class Manager {
 	public static synchronized ServerRuntime getRuntime() {
 		if (_runtime == null) {
 			// you can add this as argument to your project
-			String mysqlPassword = System.getProperty("mysqlPassword", "Bkharbat74853200");
+			String mysqlPassword = System.getProperty("mysqlPassword", "1234");
 
 			_runtime = ServerRuntime.builder()
 					.addConfig("cayenne-project.xml")
-					.dataSource(DataSourceBuilder.url("jdbc:mysql://localhost/tictactoe?useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=UTF-8")
+					.dataSource(DataSourceBuilder.url("jdbc:mysql://35.243.157.34/tictactoe?useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=UTF-8")
 							.driver(com.mysql.cj.jdbc.Driver.class.getName())
 							.userName("root")
 							.password(mysqlPassword)
