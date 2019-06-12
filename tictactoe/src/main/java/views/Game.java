@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -57,6 +58,13 @@ public class Game extends VerticalLayout implements BeforeEnterObserver, RouterL
             // Song View
             boardView = new BoardView(CurrentUser.get());
             add(boardView);
+            
+            //signout
+            Button signoutB = new Button("Sign Out", e -> {
+            	accessControl.signOut();
+            	UI.getCurrent().navigate(StartNewGame.class);
+            });	
+            add(signoutB);
         }
     }
 
