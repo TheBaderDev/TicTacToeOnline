@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
-		<vaadin.version>13.0.8</vaadin.version>
+		<vaadin.version>14.6.2</vaadin.version>
         <cayenne.version>4.1.B1</cayenne.version>
 		
 	</properties>
